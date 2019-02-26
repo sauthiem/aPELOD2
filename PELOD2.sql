@@ -1,20 +1,20 @@
 
-/*-----------------------------------------------------------------------------------------------------------|
-|	a-PELOD2                                                                                                 |
-|	Automated calculation of the PELOD-2 score (Leteurtre S, et al. 2013 Crit Care Med 41:1761–1773)         |
-|	                                                                                                         |
-|	Author: Micahel Sauthier                                                                                 |
-|	Version 1.0, 2019-02-25                                                                                  |
-|	License: AGPL v3                                                                                         |
-|	Tested and validated on SQL Server 2008 revision 2                                                       |
-|	                                                                                                         |
-|	This script uses mostly temporary table (#table) rather than CTE for performance and memory issue. But it|
-|	could be adapted easily.                                                                                 |
-|                                                                                                            |
--------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------|
+|	a-PELOD2                                                                                                  |
+|	Automated calculation of the PELOD-2 score (Leteurtre S, et al. 2013 Crit Care Med 41:1761–1773)          |
+|	                                                                                                          |
+|	Author: Michael Sauthier, MD                                                                              |
+|	Version 1.0, 2019-02-25                                                                                   |
+|	License: AGPL v3                                                                                          |
+|	Tested and validated on SQL Server 2008 revision 2                                                        |
+|	                                                                                                          |
+|	This script uses temporary table (#table) rather than CTE for performance reasons. But it can be easily   |
+|	adapted.                                                                                                  |
+|                                                                                                             |
+--------------------------------------------------------------------------------------------------------------*/
 
 
-/* Gather all the key-value into a temporary table #KV_temp formatted as:
+/* Gather all the key-values into a temporary table #KV_temp formatted as:
 	This step needs to be adapted to each electronic medical record 
 	+---------------------------------------------+
 	| PatientID | DatetimeUTC | Parameter | Value |
@@ -293,7 +293,7 @@ DROP TABLE #PELOD2_abs
 
 
 -------------------------
--- Estimation of the risk of mortality
+-- Estimation of the mortality risk (logit)
 -------------------------
 
 
