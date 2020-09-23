@@ -132,7 +132,7 @@ DROP TABLE #PELOD2_lin
 
 SELECT
 	 #PELOD2_abs.PatientID
-	,DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) AS Age_m
+	,DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12) AS Age_m
 	,CASE
 		WHEN #Adm_temp.Direction = 'Dead' THEN 1
 		ELSE 0
@@ -161,7 +161,7 @@ SELECT
 		ELSE 0
 	END AS CV_lactate
 	,CASE
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) < 1 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) < 1 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 46				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 31 AND 45	THEN 2
@@ -169,7 +169,7 @@ SELECT
 				WHEN #PELOD2_abs.MAP <= 16				THEN 6
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 1 AND 11 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 1 AND 11 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 55				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 39 AND 54	THEN 2
@@ -177,7 +177,7 @@ SELECT
 				WHEN #PELOD2_abs.MAP <= 24				THEN 6
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 12 AND 23 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 12 AND 23 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 60				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 44 AND 59	THEN 2
@@ -185,7 +185,7 @@ SELECT
 				WHEN #PELOD2_abs.MAP <= 30				THEN 6
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 24 AND 59 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 24 AND 59 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 62				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 46 AND 61	THEN 2 
@@ -193,7 +193,7 @@ SELECT
 				WHEN #PELOD2_abs.MAP <= 31				THEN 6
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 60 AND 143 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 60 AND 143 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 65				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 49 AND 64	THEN 2
@@ -201,7 +201,7 @@ SELECT
 				WHEN #PELOD2_abs.MAP <= 35				THEN 6
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) >= 144 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) >= 144 THEN
 			CASE
 				WHEN #PELOD2_abs.MAP >= 67				THEN 0
 				WHEN #PELOD2_abs.MAP BETWEEN 52 AND 66	THEN 2
@@ -213,37 +213,37 @@ SELECT
 
 	-- Rénal
 	,CASE
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) < 1 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) < 1 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 69		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 70		THEN 2
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 1 AND 11 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 1 AND 11 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 22		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 23		THEN 2
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 12 AND 23 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 12 AND 23 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 34		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 35		THEN 2
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 24 AND 59 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 24 AND 59 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 50		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 51		THEN 2
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) BETWEEN 60 AND 143 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) BETWEEN 60 AND 143 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 58		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 59		THEN 2
 				ELSE 0
 			END
-		WHEN DATEDIFF(MONTH, #Adm_temp.DateOfBirth, #Adm_temp.AdmissionTime) >= 144 THEN
+		WHEN FLOOR(DATEDIFF(DAY, #Adm_temp.DateNaissance, #Adm_temp.DateAdmission)/(365.25/12)) >= 144 THEN
 			CASE
 				WHEN #PELOD2_abs.Creatinine <= 92		THEN 0
 				WHEN #PELOD2_abs.Creatinine >= 93		THEN 2
